@@ -8,6 +8,7 @@ export default function PageLayout({
   activeMain,
   activeGroups,
   activeGroup,
+  activeItem,
   categoryProducts,
 }) {
   return (
@@ -16,6 +17,7 @@ export default function PageLayout({
         activeMain={activeMain}
         activeGroups={activeGroups}
         activeGroup={activeGroup}
+        activeItem={activeItem}
       />
 
       <section className="mt-8 grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)]">
@@ -24,18 +26,19 @@ export default function PageLayout({
             data={shopData}
             activeMain={activeMain}
             activeGroup={activeGroup}
+            activeItem={activeItem}
           />
         </div>
 
         <div className="space-y-6">
           <div className="flex flex-col gap-4 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-            {/* <div className="flex items-center gap-3 text-sm text-zinc-500">
-              <Phone className="h-4 w-4" />
+            <div className="flex items-center gap-3 text-sm text-zinc-500">
+              {/* <Phone className="h-4 w-4" /> */}
               <span>
-                Routing, Kategorie-Unterseiten und feste Navigation ohne
-                horizontales Scrollen
+                {/* Routing, Kategorie-Unterseiten und feste Navigation ohne
+                horizontales Scrollen */}
               </span>
-            </div> */}
+            </div>
 
             <div className="flex items-center gap-3">
               {/* <button className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100">

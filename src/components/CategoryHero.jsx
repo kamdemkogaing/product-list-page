@@ -7,6 +7,7 @@ export default function CategoryHero({
   activeMain,
   activeGroups,
   activeGroup,
+  activeItem,
 }) {
   const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ export default function CategoryHero({
         <Link to="/" className="hover:text-black">
           Start
         </Link>
+
         <span>/</span>
         <span>{activeMain}</span>
 
@@ -24,6 +26,13 @@ export default function CategoryHero({
           <>
             <span>/</span>
             <span>{activeGroup}</span>
+          </>
+        )}
+
+        {activeItem && (
+          <>
+            <span>/</span>
+            <span>{activeItem}</span>
           </>
         )}
       </div>
@@ -35,7 +44,7 @@ export default function CategoryHero({
           </p>
 
           <h1 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">
-            {activeGroup || activeMain}
+            {activeItem || activeGroup || activeMain}
           </h1>
         </div>
 

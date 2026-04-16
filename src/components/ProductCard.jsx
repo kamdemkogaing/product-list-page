@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
         <div className="flex items-end justify-between gap-4">
           <p className="text-sm font-bold text-zinc-950">{product.price}</p>
 
-          <button className="rounded-full bg-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-zinc-800">
+          <button className="rounded-full bg-black px-4 py-2 text-xs font-semibold tracking-[0.18em] text-white transition hover:bg-zinc-800">
             Variante wählen
           </button>
         </div>

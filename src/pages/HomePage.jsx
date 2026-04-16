@@ -26,7 +26,8 @@ export default function HomePage({
         activeMain={activeMain}
         activeGroups={activeGroups}
         activeGroup={null}
-        categoryProducts={products}
+        activeItem={null}
+        categoryProducts={products.slice(0, 9)}
       />
     </div>
   );

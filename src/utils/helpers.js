@@ -18,7 +18,10 @@ export function flattenMenu(data) {
     groups: Object.entries(groups).map(([groupName, items]) => ({
       label: groupName,
       slug: slugify(groupName),
-      items,
+      items: items.map((item) => ({
+        label: item,
+        slug: slugify(item),
+      })),
     })),
   }));
 }
@@ -35,18 +38,44 @@ export function findGroupBySlug(mainKey, groupSlug) {
   );
 }
 
+export function findItemBySlug(mainKey, groupKey, itemSlug) {
+  if (!mainKey || !groupKey || !itemSlug) return null;
+
+  const items = shopData.Shop[mainKey]?.[groupKey] || [];
+  return items.find((item) => slugify(item) === itemSlug) || null;
+}
+
 export function getProductsForCategory(groupName, items) {
-  const normalized = [groupName, ...(items || [])].map((entry) =>
-    entry.toLowerCase(),
-  );
+  const names = [groupName, ...(items || [])];
 
   const filtered = products.filter((product) =>
-    normalized.some(
-      (entry) =>
-        product.category.toLowerCase().includes(entry) ||
-        product.title.toLowerCase().includes(entry),
+    names.some((name) => product.category.toLowerCase() === name.toLowerCase()),
+  );
+
+  return filtered.length ? filtered : [];
+}
+
+export function getProductsForItem(itemName) {
+  if (!itemName) return [];
+
+  const filtered = products.filter(
+    (product) => product.category.toLowerCase() === itemName.toLowerCase(),
+  );
+
+  return filtered.length ? filtered : [];
+}
+
+export function getProductsForMainCategory(mainKey) {
+  if (!mainKey) return [];
+
+  const groups = shopData.Shop[mainKey] || {};
+  const allItems = Object.values(groups).flat();
+
+  const filtered = products.filter((product) =>
+    allItems.some(
+      (item) => product.category.toLowerCase() === item.toLowerCase(),
     ),
   );
 
-  return filtered.length ? filtered : products;
+  return filtered.length ? filtered : [];
 }

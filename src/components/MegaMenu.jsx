@@ -25,16 +25,15 @@ export default function MegaMenu({ menuItems, activeMain, setActiveMain }) {
               <span className="block truncate">{entry.label}</span>
             </button>
 
-            {/* Unsichtbare Hover-Brücke zwischen Button und Dropdown */}
             <div className="absolute left-0 right-0 top-full h-6 bg-transparent" />
 
             <div className="pointer-events-none absolute left-0 top-[calc(100%+20px)] z-30 w-[760px] max-w-[76vw] translate-y-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
               <div className="rounded-[2rem] border border-zinc-200 bg-white p-6 shadow-2xl">
                 <div className="mb-5 flex items-center justify-between border-b border-zinc-100 pb-4">
                   <div>
-                    {/* <p className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-500">
                       Mega Menü
-                    </p> */}
+                    </p>
                     <h3 className="text-2xl font-black text-zinc-950">
                       {entry.label}
                     </h3>
@@ -65,16 +64,16 @@ export default function MegaMenu({ menuItems, activeMain, setActiveMain }) {
 
                       <ul className="space-y-2">
                         {group.items.map((item) => (
-                          <li key={item}>
+                          <li key={item.slug}>
                             <button
                               onClick={() =>
                                 navigate(
-                                  `/kategorie/${entry.slug}/${group.slug}`,
+                                  `/kategorie/${entry.slug}/${group.slug}/${item.slug}`,
                                 )
                               }
                               className="text-left text-sm text-zinc-600 transition hover:text-black"
                             >
-                              {item}
+                              {item.label}
                             </button>
                           </li>
                         ))}

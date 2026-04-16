@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { cls } from "../utils/cls";
 import { slugify } from "../utils/helpers";
 
-export default function Sidebar({ data, activeMain, activeGroup }) {
+export default function Sidebar({ data, activeMain, activeGroup, activeItem }) {
   const navigate = useNavigate();
   const entries = Object.entries(data.Shop);
 
@@ -43,7 +43,12 @@ export default function Sidebar({ data, activeMain, activeGroup }) {
                   {Object.entries(groups).map(([groupName, items]) => (
                     <div
                       key={groupName}
-                      className="rounded-2xl bg-zinc-50 px-4 py-4"
+                      className={cls(
+                        "rounded-2xl px-4 py-4 transition",
+                        activeGroup === groupName
+                          ? "bg-white ring-1 ring-zinc-200"
+                          : "bg-zinc-50",
+                      )}
                     >
                       <button
                         onClick={() =>
@@ -58,26 +63,51 @@ export default function Sidebar({ data, activeMain, activeGroup }) {
                             : "text-zinc-900 hover:text-black",
                         )}
                       >
-                        <FolderOpen className="h-4 w-4 shrink-0 text-zinc-500" />
+                        <FolderOpen
+                          className={cls(
+                            "h-4 w-4 shrink-0",
+                            activeGroup === groupName
+                              ? "text-black"
+                              : "text-zinc-500",
+                          )}
+                        />
                         <span>{groupName}</span>
                       </button>
 
                       <ul className="ml-1 space-y-2">
-                        {items.map((item) => (
-                          <li key={item}>
-                            <button
-                              onClick={() =>
-                                navigate(
-                                  `/kategorie/${slugify(mainKey)}/${slugify(groupName)}`,
-                                )
-                              }
-                              className="flex items-center gap-2 text-left text-sm text-zinc-600 transition hover:text-black"
-                            >
-                              <Dot className="h-5 w-5 shrink-0 text-zinc-400" />
-                              <span>{item}</span>
-                            </button>
-                          </li>
-                        ))}
+                        {items.map((item) => {
+                          const isActiveItem = activeItem === item;
+
+                          return (
+                            <li key={item}>
+                              <button
+                                onClick={() =>
+                                  navigate(
+                                    `/kategorie/${slugify(mainKey)}/${slugify(
+                                      groupName,
+                                    )}/${slugify(item)}`,
+                                  )
+                                }
+                                className={cls(
+                                  "flex w-full items-center gap-2 rounded-xl px-2 py-1.5 text-left text-sm transition",
+                                  isActiveItem
+                                    ? "bg-black text-white"
+                                    : "text-zinc-600 hover:bg-zinc-100 hover:text-black",
+                                )}
+                              >
+                                <Dot
+                                  className={cls(
+                                    "h-5 w-5 shrink-0",
+                                    isActiveItem
+                                      ? "text-white"
+                                      : "text-zinc-400",
+                                  )}
+                                />
+                                <span>{item}</span>
+                              </button>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   ))}

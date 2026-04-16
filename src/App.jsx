@@ -50,6 +50,19 @@ function AppShell() {
           />
         }
       />
+
+      <Route
+        path="/kategorie/:mainSlug/:groupSlug/:itemSlug"
+        element={
+          <CategoryPage
+            menuItems={menuItems}
+            activeMain={activeMain}
+            setActiveMain={setActiveMain}
+            mobileOpen={mobileOpen}
+            setMobileOpen={setMobileOpen}
+          />
+        }
+      />
     </Routes>
   );
 }
