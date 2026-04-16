@@ -1,4 +1,4 @@
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { shopData } from "../data/shopData";
 import CategoryHero from "./CategoryHero";
 import ProductCard from "./ProductCard";
@@ -11,7 +11,7 @@ export default function PageLayout({
   categoryProducts,
 }) {
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-[90rem] px-4 py-8 sm:px-6 lg:px-8">
       <CategoryHero
         activeMain={activeMain}
         activeGroups={activeGroups}
@@ -29,18 +29,18 @@ export default function PageLayout({
 
         <div className="space-y-6">
           <div className="flex flex-col gap-4 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3 text-sm text-zinc-500">
+            {/* <div className="flex items-center gap-3 text-sm text-zinc-500">
               <Phone className="h-4 w-4" />
               <span>
                 Routing, Kategorie-Unterseiten und feste Navigation ohne
                 horizontales Scrollen
               </span>
-            </div>
+            </div> */}
 
             <div className="flex items-center gap-3">
-              <button className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100">
+              {/* <button className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100">
                 Filter
-              </button>
+              </button> */}
 
               <button className="flex items-center gap-2 rounded-2xl border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50">
                 Topseller
