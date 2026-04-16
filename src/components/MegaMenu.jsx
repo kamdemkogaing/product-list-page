@@ -32,7 +32,7 @@ export default function MegaMenu({ menuItems, activeMain, setActiveMain }) {
                 <div className="mb-5 flex items-center justify-between border-b border-zinc-100 pb-4">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-500">
-                      Mega Menü
+                      {/* Mega Menü */}
                     </p>
                     <h3 className="text-2xl font-black text-zinc-950">
                       {entry.label}
