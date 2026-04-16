@@ -1,3 +1,6 @@
+import { products } from "../data/products";
+import { shopData } from "../data/shopData";
+
 export function slugify(value) {
   return value
     .toLowerCase()
@@ -20,6 +23,30 @@ export function flattenMenu(data) {
   }));
 }
 
-export function findMainBySlug(data, slug) {
-  return Object.keys(data.Shop).find((k) => slugify(k) === slug);
+export function findMainBySlug(mainSlug) {
+  return Object.keys(shopData.Shop).find((key) => slugify(key) === mainSlug);
+}
+
+export function findGroupBySlug(mainKey, groupSlug) {
+  if (!mainKey || !groupSlug) return null;
+
+  return Object.keys(shopData.Shop[mainKey] || {}).find(
+    (key) => slugify(key) === groupSlug,
+  );
+}
+
+export function getProductsForCategory(groupName, items) {
+  const normalized = [groupName, ...(items || [])].map((entry) =>
+    entry.toLowerCase(),
+  );
+
+  const filtered = products.filter((product) =>
+    normalized.some(
+      (entry) =>
+        product.category.toLowerCase().includes(entry) ||
+        product.title.toLowerCase().includes(entry),
+    ),
+  );
+
+  return filtered.length ? filtered : products;
 }

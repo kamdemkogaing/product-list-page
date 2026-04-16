@@ -1,23 +1,26 @@
 import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { cls } from "../utils/cls";
 import MegaMenu from "./MegaMenu";
 
-function Header({
-  mainEntries,
+export default function Header({
+  menuItems,
   activeMain,
   setActiveMain,
   mobileOpen,
   setMobileOpen,
 }) {
+  const navigate = useNavigate();
+
   return (
     <header className="border-b border-zinc-800 bg-black text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <div>
+        <button onClick={() => navigate("/")}>
           <p className="text-2xl font-black uppercase tracking-tight">Print</p>
           <p className="-mt-1 text-sm uppercase tracking-[0.28em] text-zinc-400">
             Equipment
           </p>
-        </div>
+        </button>
 
         <div className="hidden flex-1 items-center justify-center lg:flex">
           <div className="flex w-full max-w-xl items-center rounded-full border border-zinc-700 bg-zinc-950 px-4 py-3">
@@ -36,6 +39,7 @@ function Header({
             </p>
             <p>Support · DE</p>
           </div>
+
           <Heart className="h-5 w-5" />
           <User className="h-5 w-5" />
           <ShoppingBag className="h-5 w-5" />
@@ -54,7 +58,7 @@ function Header({
       </div>
 
       <MegaMenu
-        mainEntries={mainEntries}
+        menuItems={menuItems}
         activeMain={activeMain}
         setActiveMain={setActiveMain}
       />
@@ -68,22 +72,24 @@ function Header({
               className="w-full bg-transparent text-sm text-white outline-none placeholder:text-zinc-500"
             />
           </div>
-          <div className="flex flex-wrap gap-2">
-            {mainEntries.map(([key]) => (
+
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {menuItems.map((entry) => (
               <button
-                key={key}
+                key={entry.slug}
                 onClick={() => {
-                  setActiveMain(key);
+                  setActiveMain(entry.label);
                   setMobileOpen(false);
+                  navigate(`/kategorie/${entry.slug}`);
                 }}
                 className={cls(
-                  "rounded-full border px-4 py-2 text-sm font-medium",
-                  activeMain === key
+                  "rounded-2xl border px-4 py-3 text-sm font-medium",
+                  activeMain === entry.label
                     ? "border-white bg-white text-black"
                     : "border-zinc-700 text-white",
                 )}
               >
-                {key}
+                {entry.label}
               </button>
             ))}
           </div>
@@ -92,5 +98,3 @@ function Header({
     </header>
   );
 }
-
-export default Header;

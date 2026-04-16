@@ -1,23 +1,33 @@
 import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
-import Sidebar from "../components/Sidebar";
+import PageLayout from "../components/PageLayout";
 import { products } from "../data/products";
 import { shopData } from "../data/shopData";
 
-export default function HomePage(props) {
+export default function HomePage({
+  menuItems,
+  activeMain,
+  setActiveMain,
+  mobileOpen,
+  setMobileOpen,
+}) {
+  const activeGroups = shopData.Shop[activeMain];
+
   return (
-    <div>
-      <Header {...props} />
+    <div className="min-h-screen bg-zinc-100 text-zinc-900">
+      <Header
+        menuItems={menuItems}
+        activeMain={activeMain}
+        setActiveMain={setActiveMain}
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
+      />
 
-      <div className="grid grid-cols-[250px_1fr] gap-4 p-6">
-        <Sidebar data={shopData} activeMain={props.activeMain} />
-
-        <div className="grid grid-cols-3 gap-4">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      </div>
+      <PageLayout
+        activeMain={activeMain}
+        activeGroups={activeGroups}
+        activeGroup={null}
+        categoryProducts={products}
+      />
     </div>
   );
 }
